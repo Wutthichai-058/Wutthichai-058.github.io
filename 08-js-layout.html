@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- Blocking JavaScript -->
+    <script>
+        $(function () {
+            $("head").load("08-head.html");
+            $("#header").load("08-header.html");
+            $("#footer").load("08-footer.html");
+        });
+
+        let row
+        let cell1
+        let cell2
+        let cell3
+        let cell
+
+        let aray_full_name = []
+        let aray_phone = []
+        let aray_email = []
+
+        if (localStorage.getItem('full_name') != null && localStorage.getItem('phone') != null &&
+            localStorage.getItem('email') != null) {
+
+            aray_full_name = JSON.parse(localStorage.getItem('full_name'))
+            aray_phone = JSON.parse(localStorage.getItem('phone'))
+            aray_email = JSON.parse(localStorage.getItem('email'))
+
+        }
+    </script>
+    <title>08-js-layout by WUTTHICHAI</title>
+
+</head>
+
+<body onload="load_data()">
+    <section class="hero has-background-danger-light is-fullheight">
+        <!-- Hero head: will stick at the top -->
+        <div id="header"></div>
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body has-background-primary-light is-align-items-start">
+            <div class="column is-centered">
+                <div class="column is-half mx-auto">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content">
+                                <button class="button is-warning mb-3" onclick="insert_data()">
+                                    Insert Data</button> 
+                                <table id="tb1" class="table is-hoverable is-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>FNAME</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero footer: will stick at the bottom -->
+        <div id="footer"></div>
+    </section>
+    <script>
+        let tb1 = document.getElementById('tb1').getElementsByTagName('tbody')[0]
+        function load_data(){ 
+            for (let i = 0; i < aray_full_name.length; i++) {
+                row = tb1.insertRow()
+                cell1 = row.insertCell()
+                cell1.innerHTML = aray_full_name[i]
+                cell2 = row.insertCell()
+                cell2.innerHTML = aray_phone[i]
+                cell3 = row.insertCell()
+                cell3.innerHTML = aray_email[i]
+                cell = row.insertCell()
+                cell.innerHTML = '<button class="button is-black">Edit</button>'
+                cell = row.insertCell()
+                cell.innerHTML = '<button class="button is-danger">Delete</button>'
+                // console.log(aray_full_name[i])
+                // console.log(aray_phone[i])
+                // console.log(aray_email[i])
+            }
+
+        }
+
+        function insert_data(){
+            row = tb1.insertRow()
+            cell = row.insertCell()
+
+            cell.innerHTML = '<input class="input" type="text" placholder="Input Full Name" id ="full_name">'
+            cell = row.insertCell()
+
+            cell.innerHTML = '<input class="input" type="text" placholder="Input Your phone" id ="phone">'
+            cell = row.insertCell()
+
+            cell.innerHTML = '<input class="input" type="text" placholder="Input Email" id ="email">'
+            cell = row.insertCell()
+
+            cell.innerHTML = '<button class="button is-primary" onclick="save_data()">Save</button>'
+            cell = row.insertCell()
+
+            cell.innerHTML  = '<button class="button is-danger" onclick="cancle_insert()">Cancel</button>'
+        }
+
+        function cancle_insert(){
+            console.log(tb1.rows.length)
+            row = tb1.deleteRow(tb1.rows.length -1)
+        }
+        function save_data(){
+            if( document.getElementById('full_name').value != '' &&  document.getElementById('phone').value != '' &&  document.getElementById('email').value != ''){
+              
+              aray_full_name.push(document.getElementById('full_name').value)
+              aray_phone.push(document.getElementById('phone').value)
+              aray_email.push(document.getElementById('email').value)
+
+              localStorage.setItem('full_name',JSON.stringify(aray_full_name))
+              localStorage.setItem('phone',JSON.stringify(aray_phone))
+              localStorage.setItem('email',JSON.stringify(aray_email))
+                
+              document.getElementById('full_name').value = '' 
+              document.getElementById('phone').value = '' 
+              document.getElementById('email').value = ''
+
+
+             tb1.innerHTML = ''
+             load_data()
+
+            }
+            else
+            {
+                window.alert('Please Input')
+            }
+        }
+    </script>
+</body>
+
+</html>

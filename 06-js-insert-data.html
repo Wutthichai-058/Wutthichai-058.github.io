@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06-js-insert-data.html By WUTTHICHAI</title>
+
+    <script>
+
+        let aray_full_name=[]
+        let aray_phone=[]
+        let aray_email=[]
+        
+        if(localStorage.getItem('full_name') != null && localStorage.getItem('phone') != null && 
+        localStorage.getItem('email') != null){
+
+        aray_full_name =JSON.parse(localStorage.getItem('full_name'))
+        aray_phone =JSON.parse(localStorage.getItem('phone'))
+        aray_email =JSON.parse(localStorage.getItem('email'))
+        
+        }
+        
+
+        function click_submit() {
+
+            if( document.getElementById('full_name').value != '' &&  document.getElementById('phone').value != '' &&  document.getElementById('email').value != ''){
+              
+              aray_full_name.push(document.getElementById('full_name').value)
+              aray_phone.push(document.getElementById('phone').value)
+              aray_email.push(document.getElementById('email').value)
+
+              localStorage.setItem('full_name',JSON.stringify(aray_full_name))
+              localStorage.setItem('phone',JSON.stringify(aray_phone))
+              localStorage.setItem('email',JSON.stringify(aray_email))
+                
+              document.getElementById('full_name').value = '' 
+              document.getElementById('phone').value = '' 
+              document.getElementById('email').value = ''
+
+            }
+            else
+            {
+                window.alert('Please Input')
+            }
+        }
+            
+            
+        
+    </script>
+
+    <script>
+       
+        function focusout_full_name() {
+            
+            if( document.getElementById('full_name').value != ''){
+                document.getElementById('noti_full_name').innerHTML = ''
+            }else{
+                document.getElementById('noti_full_name').innerHTML = 'This Full Name is invalid'
+            }
+
+        
+        }
+    </script>
+
+    <script>
+        function focusout_phone() {
+            
+   
+         if( document.getElementById('phone').value != ''){
+                document.getElementById('noti_phone').innerHTML = ''
+            }else{
+                document.getElementById('noti_phone').innerHTML = 'This Full Name is invalid'
+            }
+        }
+    </script>
+
+<script>
+    function focusout_email() {
+        if( document.getElementById('email').value != ''){
+                document.getElementById('noti_email').innerHTML = ''
+            }else{
+                document.getElementById('noti_email').innerHTML = 'This Full Name is invalid'
+            }
+    }
+</script>
+    
+       <script>
+        function focus_full_name() {
+            document.getElementById('noti_full_name').innerHTML = ''
+        }
+       </script>
+
+       <script>
+        function focus_phone() {
+            document.getElementById('noti_phone').innerHTML = ''
+        }
+       </script>
+
+       <script>
+        function focus_email(params) {
+            document.getElementById('noti_email').innerHTML = ''
+        }
+       </script>
+
+
+        <script>
+            function click_cancle() {
+                document.getElementById('full_name').value = '' 
+                document.getElementById('phone').value = '' 
+                document.getElementById('email').value = ''
+
+                document.getElementById('output_full_name').innerHTML = ''
+                document.getElementById('output_phone').innerHTML = ''
+                document.getElementById('output_email').innerHTML =  ''
+
+
+            }
+        </script>
+
+</head>
+<body>
+    <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Home
+            </a>
+      
+            <a class="navbar-item">
+              Documentation
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="05-js-basic-form.html">
+                  Page-05 
+                </a>
+
+                <a class="navbar-item" href="06-js-insert-data.html">
+                  Page-06
+                </a>
+                <a class="navbar-item" href="07-js-show-data.html">
+                  Page-07
+                </a>
+                <a class="navbar-item" href="08-js-layout.html">
+                  Page-08
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
+    </nav>
+
+      <div class="columns is-centered mt-5" >
+        <div class="column is-one-third is half">
+            <div class="card">
+                <div class="card-content has-background-danger-light">
+                  <div class="content">
+                    <div class="field">
+                        <label class="label">Full Name</label>
+                        <div class="control has-icons-left has-icons-right">
+                          <input class="input is-success" type="text" placeholder="Input Full Name"id="full_name" onfocusout="focusout_full_name()" onfocus="focus_full_name">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-users fa-pulse" style="color: #51501f;"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                          </span>
+                        </div>
+                        <p class="help is-danger" id="noti_full_name"></p>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Telephone Number</label>
+                        <div class="control has-icons-left has-icons-right">
+                          <input class="input is-success" type="tel" placeholder="Input Telephone Number" value=""id="phone" onfocusout="focusout_phone()" onfocus="focus_phone()">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-phone fa-pulse fa-lg" style="color: #1f5137;"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                          </span>
+                        </div>
+                        <p class="help is-danger" id="noti_phone"></p>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                          <input class="input is-danger" type="email" placeholder="Email input" value=""id="email" onfocusout="focusout_email()" onfocus="focus_email()">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-envelope fa-pulse" style="color: #1f513e;"></i>
+                          </span>
+                          <span class="icon is-small is-right">
+                            <i class="fas fa-exclamation-triangle"></i>
+                          </span>
+                        </div>
+                        <p class="help is-danger" id="noti_email"></p>
+                      </div>
+                      
+                      
+                      
+                      <div class="field is-grouped">
+                        <div class="control">
+                          <button class="button is-link" onclick="click_submit()">Submit</button>
+                        </div>
+                        <div class="control">
+                          <button class="button is-link is-light" onclick="click_cancle()">Cancel</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        
+         
+
+      
+</body>
+</html>
